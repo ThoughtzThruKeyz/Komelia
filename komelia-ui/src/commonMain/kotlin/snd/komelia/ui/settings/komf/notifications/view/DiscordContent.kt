@@ -191,7 +191,7 @@ fun DiscordNotificationsContent(
 }
 
 @Composable
-private fun AddDiscordWebhookDialog(
+internal fun AddDiscordWebhookDialog(
     onDismissRequest: () -> Unit,
     onWebhookAdd: (String) -> Unit,
 ) {

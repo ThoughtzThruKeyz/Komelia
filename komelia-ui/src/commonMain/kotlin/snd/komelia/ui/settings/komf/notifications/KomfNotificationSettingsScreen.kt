@@ -36,7 +36,7 @@ class KomfNotificationSettingsScreen : Screen {
             when (vmState) {
                 is LoadState.Error -> Text(formatExceptionMessage(vmState.exception))
                 LoadState.Loading, LoadState.Uninitialized -> LoadingMaxSizeIndicator()
-                is LoadState.Success -> KomfSettingsContent(vm.discordState, vm.appriseState)
+                is LoadState.Success -> KomfSettingsContent(vm.discordState, vm.appriseState, vm.serverNotificationsState)
             }
 
         }

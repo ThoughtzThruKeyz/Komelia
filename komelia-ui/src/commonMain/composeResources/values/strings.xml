@@ -787,6 +787,11 @@
     <string name="komf_notification_apprise_template_body">Body</string>
     <string name="komf_notification_apprise_template_test_send">Test send</string>
     <string name="komf_notification_apprise_template_save">Save</string>
+    <string name="komf_notification_servers">Servers</string>
+    <string name="komf_notification_servers_desc">Send notifications from each server to its own targets instead of the global ones on the Discord and Apprise tabs. Templates are shared.</string>
+    <string name="komf_notification_servers_use_global_discord">Use global Discord webhooks</string>
+    <string name="komf_notification_servers_use_global_apprise">Use global Apprise URLs</string>
+    <string name="komf_notification_servers_no_targets">No targets: this server sends no notifications here</string>
     <string name="komf_notification_discord">Discord</string>
     <string name="komf_notification_discord_webhooks">Webhooks</string>
     <string name="komf_notification_discord_upload_series_cover">Upload series cover</string>

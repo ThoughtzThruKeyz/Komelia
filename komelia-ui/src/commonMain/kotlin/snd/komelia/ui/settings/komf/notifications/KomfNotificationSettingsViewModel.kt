@@ -39,16 +39,25 @@ class KomfNotificationSettingsViewModel(
         coroutineScope = screenModelScope
     )
 
+    val serverNotificationsState = ServerNotificationsState(
+        komfConfigClient = komfConfigClient,
+        appNotifications = appNotifications,
+        komfConfig = komfConfig,
+        coroutineScope = screenModelScope
+    )
+
     suspend fun initialize() {
         appNotifications.runCatchingToNotifications {
             val config = komfConfig.getConfig()
             val currentConfig = config.first()
             discordState.initialize(currentConfig)
             appriseState.initialize(currentConfig)
+            serverNotificationsState.initialize(currentConfig)
 
             config.drop(1).onEach {
                 discordState.initialize(it)
                 appriseState.initialize(it)
+                serverNotificationsState.initialize(it)
             }.launchIn(screenModelScope)
 
         }

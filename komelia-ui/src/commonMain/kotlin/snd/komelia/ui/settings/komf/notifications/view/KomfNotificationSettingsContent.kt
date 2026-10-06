@@ -17,16 +17,19 @@ import androidx.compose.ui.unit.dp
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.Res
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_notification_apprise
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_notification_discord
+import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_notification_servers
 import org.jetbrains.compose.resources.stringResource
 import snd.komelia.ui.StateHolder
 import snd.komelia.ui.platform.cursorForHand
 import snd.komelia.ui.settings.komf.notifications.AppriseState
 import snd.komelia.ui.settings.komf.notifications.DiscordState
+import snd.komelia.ui.settings.komf.notifications.ServerNotificationsState
 
 @Composable
 fun KomfSettingsContent(
     discordState: DiscordState,
     appriseState: AppriseState,
+    serverNotificationsState: ServerNotificationsState,
 ) {
     Column {
         var selectedTab by remember { mutableStateOf(0) }
@@ -44,6 +47,13 @@ fun KomfSettingsContent(
                 modifier = Modifier.heightIn(min = 40.dp).cursorForHand(),
             ) {
                 Text(stringResource(Res.string.komf_notification_apprise))
+            }
+            Tab(
+                selected = selectedTab == 2,
+                onClick = { selectedTab = 2 },
+                modifier = Modifier.heightIn(min = 40.dp).cursorForHand(),
+            ) {
+                Text(stringResource(Res.string.komf_notification_servers))
             }
         }
         Spacer(Modifier.height(30.dp))
@@ -80,6 +90,8 @@ fun KomfSettingsContent(
                 onTemplateSend = discordState::onTemplatesSend,
                 onTemplateRender = discordState::onTemplateRender,
             )
+
+            2 -> ServerNotificationsContent(serverNotificationsState)
 
             else -> AppriseContent(
                 urls = appriseState.appriseUrls,
