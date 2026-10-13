@@ -66,6 +66,7 @@ import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_edit
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_edit_close
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_mal_client_id
+import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_metron_api_key
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_mangabaka_database
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_mangabaka_database_checksum
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_mangabaka_database_download
@@ -152,6 +153,9 @@ fun KomfProvidersSettingsContent(
     malClientId: String?,
     onMalClientIdSave: (String) -> Unit,
 
+    metronApiKey: String?,
+    onMetronApiKeySave: (String) -> Unit,
+
     mangaBakaDbMetadata: MangaBakaDatabaseDto?,
     onMangaBakaUpdate: () -> Flow<DownloadProgress>,
     bookWalkerDownloadTimestamp: Instant?,
@@ -177,6 +181,8 @@ fun KomfProvidersSettingsContent(
                     onComicVineClientIdSave = onComicVineClientIdSave,
                     malClientId = malClientId,
                     onMalClientIdSave = onMalClientIdSave,
+                    metronApiKey = metronApiKey,
+                    onMetronApiKeySave = onMetronApiKeySave,
                     mangaBakaDbMetadata = mangaBakaDbMetadata,
                     onMangaBakaUpdate = onMangaBakaUpdate,
                     bookWalkerDownloadTimestamp = bookWalkerDownloadTimestamp,
@@ -314,6 +320,8 @@ private fun CommonSettingsContent(
 
     malClientId: String?,
     onMalClientIdSave: (String) -> Unit,
+    metronApiKey: String?,
+    onMetronApiKeySave: (String) -> Unit,
     mangaBakaDbMetadata: MangaBakaDatabaseDto?,
     onMangaBakaUpdate: () -> Flow<DownloadProgress>,
     bookWalkerDownloadTimestamp: Instant?,
@@ -347,6 +355,12 @@ private fun CommonSettingsContent(
             onValueSave = onMalClientIdSave,
             useEditButton = true,
             label = { Text(stringResource(Res.string.komf_providers_mal_client_id)) }
+        )
+        SavableTextField(
+            currentValue = metronApiKey ?: "",
+            onValueSave = onMetronApiKeySave,
+            useEditButton = true,
+            label = { Text(stringResource(Res.string.komf_providers_metron_api_key)) }
         )
 
         HorizontalDivider()

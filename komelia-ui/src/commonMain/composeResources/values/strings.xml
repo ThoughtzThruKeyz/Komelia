@@ -873,6 +873,7 @@
     <string name="komf_providers_add">Add provider</string>
     <string name="komf_providers_name_matching_mode">Name matching mode</string>
     <string name="komf_providers_comicvine_client_id">ComicVine client id</string>
+    <string name="komf_providers_metron_api_key">Metron API token</string>
     <string name="komf_providers_mal_client_id">MyAnimeList client id</string>
     <string name="komf_providers_database_download_date">Download date %1$s</string>
     <string name="komf_providers_mangabaka_database">MangaBaka Offline Database</string>
@@ -923,6 +924,7 @@
     <string name="komf_provider_bangumi">Bangumi</string>
     <string name="komf_provider_bookwalker">Bookwalker Global</string>
     <string name="komf_provider_comicvine">ComicVine</string>
+    <string name="komf_provider_metron">Metron</string>
     <string name="komf_provider_hentag">Hentag</string>
     <string name="komf_provider_kodansha">Kodansha US</string>
     <string name="komf_provider_mal">MyAnimeList</string>

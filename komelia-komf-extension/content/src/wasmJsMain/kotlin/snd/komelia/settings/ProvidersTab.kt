@@ -51,6 +51,8 @@ class ProvidersTab : DialogTab {
                 onComicVineClientIdSave = vm::onComicVineClientIdChange,
                 malClientId = vm.malClientId,
                 onMalClientIdSave = vm::onMalClientIdChange,
+                metronApiKey = vm.metronApiKey,
+                onMetronApiKeySave = vm::onMetronApiKeyChange,
                 mangaBakaDbMetadata = vm.mangaBakaDbMetadata,
                 onMangaBakaUpdate = vm::onMangaBakaDbUpdate,
                 bookWalkerDownloadTimestamp = vm.bookWalkerDownloadTimestamp,

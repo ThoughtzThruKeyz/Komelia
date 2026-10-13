@@ -27,6 +27,7 @@ import snd.komf.api.KomfCoreProviders.MAL
 import snd.komf.api.KomfCoreProviders.MANGADEX
 import snd.komf.api.KomfCoreProviders.MANGA_BAKA
 import snd.komf.api.KomfCoreProviders.MANGA_UPDATES
+import snd.komf.api.KomfCoreProviders.METRON
 import snd.komf.api.KomfCoreProviders.NAUTILJON
 import snd.komf.api.KomfCoreProviders.VIZ
 import snd.komf.api.KomfCoreProviders.WEBTOONS
@@ -75,6 +76,8 @@ class KomfProvidersSettingsViewModel(
         private set
     var malClientId by mutableStateOf<String?>(null)
         private set
+    var metronApiKey by mutableStateOf<String?>(null)
+        private set
     var nameMatchingMode by mutableStateOf(KomfNameMatchingMode.CLOSEST_MATCH)
         private set
     var mangaBakaDbMetadata by mutableStateOf<MangaBakaDatabaseDto?>(null)
@@ -100,6 +103,7 @@ class KomfProvidersSettingsViewModel(
             }.toMap()
         comicVineClientId = config.metadataProviders.comicVineClientId
         malClientId = config.metadataProviders.malClientId
+        metronApiKey = config.metadataProviders.metronApiKey
         nameMatchingMode = config.metadataProviders.nameMatchingMode
         mangaBakaDbMetadata = config.metadataProviders.mangaBakaDatabase
         bookWalkerDownloadTimestamp = config.metadataProviders.bookWalkerDownloadDate
@@ -150,6 +154,12 @@ class KomfProvidersSettingsViewModel(
         updateConfig(providersUpdate)
     }
 
+    fun onMetronApiKeyChange(apiKey: String) {
+        this.metronApiKey = apiKey
+        val providersUpdate = MetadataProvidersConfigUpdateRequest(metronApiKey = Some(apiKey))
+        updateConfig(providersUpdate)
+    }
+
     fun onMangaBakaDbUpdate(): Flow<DownloadProgress> {
         return komfConfigClient.updateMangaBakaDb()
             .flowOn(Dispatchers.Default)
@@ -172,6 +182,7 @@ class KomfProvidersSettingsViewModel(
             GenericProviderConfigState(BOOK_WALKER, config?.bookWalker, this::onProviderConfigUpdate)
         private val comicVine = GenericProviderConfigState(COMIC_VINE, config?.comicVine, this::onProviderConfigUpdate)
         private val mal = GenericProviderConfigState(MAL, config?.mal, this::onProviderConfigUpdate)
+        private val metron = GenericProviderConfigState(METRON, config?.metron, this::onProviderConfigUpdate)
         private val mangaUpdates =
             GenericProviderConfigState(MANGA_UPDATES, config?.mangaUpdates, this::onProviderConfigUpdate)
         private val mangaBaka = MangaBakaConfigState(MANGA_BAKA, config?.mangaBaka, this::onMangaBakaConfigUpdate)
@@ -184,6 +195,7 @@ class KomfProvidersSettingsViewModel(
                     if (config.bookWalker.enabled) bookWalker else null,
                     if (config.comicVine.enabled) comicVine else null,
                     if (config.mal.enabled) mal else null,
+                    if (config.metron?.enabled == true) metron else null,
                     if (config.mangaUpdates.enabled) mangaUpdates else null,
                     if (config.mangaDex.enabled) mangaDex else null,
                     if (config.mangaBaka.enabled) mangaBaka else null,
@@ -206,6 +218,7 @@ class KomfProvidersSettingsViewModel(
                 BOOK_WALKER -> bookWalker
                 COMIC_VINE -> comicVine
                 MAL -> mal
+                METRON -> metron
                 MANGA_UPDATES -> mangaUpdates
                 MANGADEX -> mangaDex
                 MANGA_BAKA -> mangaBaka
@@ -263,6 +276,7 @@ class KomfProvidersSettingsViewModel(
                 BOOK_WALKER -> ProvidersConfigUpdateRequest(bookWalker = Some(config))
                 COMIC_VINE -> ProvidersConfigUpdateRequest(comicVine = Some(config))
                 MAL -> ProvidersConfigUpdateRequest(mal = Some(config))
+                METRON -> ProvidersConfigUpdateRequest(metron = Some(config))
                 MANGA_UPDATES -> ProvidersConfigUpdateRequest(mangaUpdates = Some(config))
                 BANGUMI, HENTAG, KODANSHA, NAUTILJON, YEN_PRESS, VIZ, WEBTOONS,
                 MANGADEX, ANILIST, MANGA_BAKA, is UnknownKomfProvider -> error("Unexpected provider $provider")

@@ -15,6 +15,7 @@ import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_provider_a
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_provider_bangumi
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_provider_bookwalker
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_provider_comicvine
+import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_provider_metron
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_provider_hentag
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_provider_kodansha
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_provider_mal
@@ -429,6 +430,7 @@ data object AppStrings {
 
             KomfCoreProviders.BOOK_WALKER -> stringResource(Res.string.komf_provider_bookwalker)
             KomfCoreProviders.COMIC_VINE -> stringResource(Res.string.komf_provider_comicvine)
+            KomfCoreProviders.METRON -> stringResource(Res.string.komf_provider_metron)
             KomfCoreProviders.HENTAG -> stringResource(Res.string.komf_provider_hentag)
             KomfCoreProviders.KODANSHA -> stringResource(Res.string.komf_provider_kodansha)
             KomfCoreProviders.MAL -> stringResource(Res.string.komf_provider_mal)
