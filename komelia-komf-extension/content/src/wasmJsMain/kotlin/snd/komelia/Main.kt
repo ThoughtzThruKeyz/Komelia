@@ -82,6 +82,13 @@ private fun createKtorClient(): HttpClient {
                 val request = response.request
                 val isSse = request.attributes.getOrNull(sseRequestAttr) == true
 
+                // Since 3.6 Ktor accepts an SSE response without Content-Type and opens the session on the real body
+                // itself. Replacing it would read the emptied rawContent, end the event flow at once and abort the stream.
+                if (isSse && request.attributes.contains(CustomResponse)) {
+                    proceed()
+                    return@intercept
+                }
+
                 val newResponse = object : HttpResponse() {
                     override val call: HttpClientCall = response.call
                     override val status: HttpStatusCode = response.status
