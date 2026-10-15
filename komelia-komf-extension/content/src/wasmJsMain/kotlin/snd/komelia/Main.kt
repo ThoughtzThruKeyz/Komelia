@@ -6,6 +6,7 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.js.*
+import io.ktor.client.fetch.RequestInit
 import io.ktor.client.plugins.sse.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
@@ -17,11 +18,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import org.w3c.fetch.Response
 import snd.komelia.db.SettingsStateWrapper
 import snd.komelia.db.repository.KomfSettingsRepositoryWrapper
 import snd.komelia.db.settings.LocalStorageSettingsRepository
 import snd.komf.client.KomfClientFactory
 import kotlin.coroutines.CoroutineContext
+import kotlin.js.Promise
 
 
 val logger = KotlinLogging.logger("Komf")
@@ -66,6 +69,9 @@ private val CustomResponse: AttributeKey<Any> = AttributeKey("CustomResponse")
 // use this hack to inject our own content-type header into every response
 private fun createKtorClient(): HttpClient {
     return HttpClient(Js) {
+        engine {
+            fetch = ::contentScriptFetch
+        }
         install("ContentTypeHack") {
             receivePipeline.intercept(HttpReceivePipeline.Before) { response ->
                 if (!response.headers.isEmpty()) {
@@ -110,3 +116,9 @@ private fun createKtorClient(): HttpClient {
     }
 }
 
+// Since 3.6 Ktor calls fetch through JsClientEngineConfig.fetch, a Kotlin function value, so the Promise it returns
+// is type checked against this script's Promise. In a Firefox content script fetch returns a Promise from the page,
+// which fails that check with "ClassCastException: Cannot cast instance of Promise to Promise".
+// Settle a Promise created here instead.
+@JsFun("(input, init) => new Promise((resolve, reject) => fetch(input, init).then(resolve, reject))")
+private external fun contentScriptFetch(input: String, init: RequestInit?): Promise<Response>
