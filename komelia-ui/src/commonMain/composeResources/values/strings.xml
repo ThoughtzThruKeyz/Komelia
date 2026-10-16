@@ -912,6 +912,8 @@
     <string name="komf_providers_book_release_date">Release date</string>
     <string name="komf_providers_book_summary">Summary</string>
     <string name="komf_providers_book_tags">Tags</string>
+    <string name="komf_providers_book_characters">Characters</string>
+    <string name="komf_providers_book_teams">Teams</string>
     <string name="komf_providers_unset">Unset</string>
     <string name="komf_providers_media_type">Media type</string>
     <string name="komf_providers_author_roles">Author roles</string>

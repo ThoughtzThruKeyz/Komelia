@@ -50,6 +50,7 @@ import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_artist_roles
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_author_roles
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_book_authors
+import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_book_characters
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_book_cover
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_book_enabled
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_book_isbn
@@ -58,6 +59,7 @@ import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_book_release_date
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_book_summary
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_book_tags
+import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_book_teams
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_bookwalker_database
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_bookwalker_database_download
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_providers_bookwalker_database_update
@@ -691,6 +693,14 @@ private class BookMetadataTab(private val state: ProviderConfigState) : DialogTa
 
             SwitchWithLabel(
                 enabled = state.bookEnabled,
+                checked = state.bookCharacters,
+                onCheckedChange = state::onBookCharactersChange,
+                label = { Text(stringResource(Res.string.komf_providers_book_characters)) }
+            )
+            HorizontalDivider()
+
+            SwitchWithLabel(
+                enabled = state.bookEnabled,
                 checked = state.bookCover,
                 onCheckedChange = state::onBookCoverChange,
                 label = { Text(stringResource(Res.string.komf_providers_book_cover)) }
@@ -742,6 +752,14 @@ private class BookMetadataTab(private val state: ProviderConfigState) : DialogTa
                 checked = state.bookTags,
                 onCheckedChange = state::onBookTagsChange,
                 label = { Text(stringResource(Res.string.komf_providers_book_tags)) }
+            )
+            HorizontalDivider()
+
+            SwitchWithLabel(
+                enabled = state.bookEnabled,
+                checked = state.bookTeams,
+                onCheckedChange = state::onBookTeamsChange,
+                label = { Text(stringResource(Res.string.komf_providers_book_teams)) }
             )
         }
     }

@@ -108,6 +108,10 @@ sealed class ProviderConfigState(
         private set
     var bookTags by mutableStateOf(config?.bookMetadata?.tags ?: true)
         private set
+    var bookCharacters by mutableStateOf(config?.bookMetadata?.characters ?: true)
+        private set
+    var bookTeams by mutableStateOf(config?.bookMetadata?.teams ?: true)
+        private set
 
     fun onPriorityChange(priority: Int) {
         this.priority = priority
@@ -227,6 +231,16 @@ sealed class ProviderConfigState(
     fun onBookTagsChange(value: Boolean) {
         this.bookTags = value
         onBookMetadataSave(BookMetadataConfigUpdateRequest(tags = Some(value)))
+    }
+
+    fun onBookCharactersChange(value: Boolean) {
+        this.bookCharacters = value
+        onBookMetadataSave(BookMetadataConfigUpdateRequest(characters = Some(value)))
+    }
+
+    fun onBookTeamsChange(value: Boolean) {
+        this.bookTeams = value
+        onBookMetadataSave(BookMetadataConfigUpdateRequest(teams = Some(value)))
     }
 
     fun onMediaTypeChange(mediaType: KomfMediaType?) {
