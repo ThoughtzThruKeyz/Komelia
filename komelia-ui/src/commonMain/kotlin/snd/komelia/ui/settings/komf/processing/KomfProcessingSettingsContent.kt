@@ -29,6 +29,8 @@ import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_processing
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_processing_merge_genres_desc
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_processing_merge_tags
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_processing_merge_tags_desc
+import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_processing_prefer_longer_summary
+import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_processing_prefer_longer_summary_desc
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_processing_none
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_processing_order_books
 import io.github.snd_r.komelia.ui.komelia_ui.generated.resources.komf_processing_order_books_desc
@@ -159,6 +161,19 @@ private fun ProcessingConfigContent(
             supportingText = {
                 Text(
                     stringResource(Res.string.komf_processing_merge_tags_desc),
+                    style = MaterialTheme.typography.labelLarge,
+                )
+            }
+        )
+
+        SwitchWithLabel(
+            checked = state.preferLongerSummary,
+            onCheckedChange = state::onPreferLongerSummaryChange,
+            enabled = state.aggregate,
+            label = { Text(stringResource(Res.string.komf_processing_prefer_longer_summary)) },
+            supportingText = {
+                Text(
+                    stringResource(Res.string.komf_processing_prefer_longer_summary_desc),
                     style = MaterialTheme.typography.labelLarge,
                 )
             }

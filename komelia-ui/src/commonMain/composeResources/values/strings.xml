@@ -740,6 +740,8 @@
     <string name="komf_processing_merge_genres_desc">if aggregate option is enabled merge genres instead of taking them from first matched result</string>
     <string name="komf_processing_merge_tags">Merge tags</string>
     <string name="komf_processing_merge_tags_desc">Merge tags</string>
+    <string name="komf_processing_prefer_longer_summary">Prefer longer summary</string>
+    <string name="komf_processing_prefer_longer_summary_desc">if aggregate option is enabled use the series and book summaries with the most words instead of taking them from the first matched result</string>
     <string name="komf_processing_cover_settings">Cover settings</string>
     <string name="komf_processing_series_covers">Series covers</string>
     <string name="komf_processing_series_covers_desc">Upload series covers</string>

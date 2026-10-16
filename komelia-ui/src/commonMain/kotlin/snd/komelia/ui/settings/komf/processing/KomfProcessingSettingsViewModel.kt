@@ -140,6 +140,8 @@ class KomfProcessingSettingsViewModel(
             private set
         var mergeGenres by mutableStateOf(config?.mergeGenres ?: false)
             private set
+        var preferLongerSummary by mutableStateOf(config?.preferLongerSummary ?: false)
+            private set
         var bookCovers by mutableStateOf(config?.bookCovers ?: false)
             private set
         var seriesCovers by mutableStateOf(config?.seriesCovers ?: false)
@@ -188,6 +190,11 @@ class KomfProcessingSettingsViewModel(
         fun onMergeGenresChange(mergeGenres: Boolean) {
             this.mergeGenres = mergeGenres
             onMetadataUpdate(MetadataProcessingConfigUpdateRequest(mergeGenres = Some(mergeGenres)))
+        }
+
+        fun onPreferLongerSummaryChange(preferLongerSummary: Boolean) {
+            this.preferLongerSummary = preferLongerSummary
+            onMetadataUpdate(MetadataProcessingConfigUpdateRequest(preferLongerSummary = Some(preferLongerSummary)))
         }
 
         fun onBookCoversChange(bookCovers: Boolean) {
